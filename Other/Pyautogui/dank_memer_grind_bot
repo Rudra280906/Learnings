@@ -1,0 +1,72 @@
+import time
+import pyautogui
+#X = 1082, Y = 1459 full screen
+def get_position():
+    print('Press Ctrl-C to quit.')
+    try:
+        while True:
+            x, y = pyautogui.position()
+            positionStr = 'X: ' + str(x).rjust(4) + ' Y: ' + str(y).rjust(4)
+            print(positionStr, end='')
+            print('\b' * len(positionStr), end='', flush=True)
+    except KeyboardInterrupt:
+        print('\n')
+
+def buy_item(item):
+    # pyautogui.click(1550, 1560)
+    # pyautogui.moveTo(1869, 1448)
+    # pyautogui.click()
+    items = {"shovel": (1868, 1007), "rifle": (1859, 1062)}
+    pyautogui.write("/shop view")
+    pyautogui.press("enter")
+    pyautogui.press("enter")
+    time.sleep(2)
+    pyautogui.moveTo(items[item][0], items[item][1])
+    time.sleep(1)
+    pyautogui.click()
+    time.sleep(2)
+    pyautogui.click(2120, 930)
+    time.sleep(2)
+    pyautogui.click(1869, 1448)
+
+def main():
+    pyautogui.click(1550, 1560)
+    pyautogui.moveTo(1869, 1448)
+    pyautogui.click()
+    try:
+        while True:
+            for i in range(0, 2):
+                pyautogui.write("/dig")
+                pyautogui.press("enter")
+                pyautogui.press("enter")
+                time.sleep(2)
+                # x1, y1 = pyautogui.locateOnScreen("shovel.png")
+                # print(pyautogui.pixel(1879, 1342))
+                # if 1790 <= x1 <= 2060 and 1390 <= y1 <= 1400:
+                # print(pyautogui.pixelMatchesColor(1879, 1342, (191, 196, 208), tolerance=20))
+                if pyautogui.pixelMatchesColor(1879, 1342, (207, 212, 221), tolerance=20):
+                    # print("Buying Shovel")
+                    buy_item("shovel")
+                    time.sleep(12)
+                    continue
+                # print("Not Buying Shovel")
+                time.sleep(19)
+            pyautogui.write("/beg")
+            pyautogui.press("enter")
+            pyautogui.press("enter")
+            time.sleep(1)
+            # time.sleep(2)
+            # print(pyautogui.pixel(1993, 1330))
+            # if pyautogui.pixelMatchesColor(1993, 1330, (93, 57, 30), tolerance=20):
+            #     # print("Buying Shovel")
+            #     buy_item("rifle")
+            #     time.sleep(2)
+            #     continue
+            # time.sleep(9)
+
+    except KeyboardInterrupt:
+        print('\n')
+if __name__ == "__main__":
+    main()
+    # get_position()
+    # buy_item()
