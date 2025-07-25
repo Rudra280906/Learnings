@@ -13,4 +13,19 @@ def firstUniqChar(s):
     else:
         return list(s).index(queue[0])
 
+# Hash Table Approach
+def firstUniqCharHash(s):
+    queue = {}
+    for c in list(s):
+        if c not in queue.keys():
+            queue.update([(c, 1)])
+            continue
+        else:
+            queue[c] += 1
+    for i, c in enumerate(s):
+        if queue[c] == 1:
+            return i
+    return -1
+
 print(firstUniqChar("aadadaad"))
+print(firstUniqCharHash("aadadaad"))
