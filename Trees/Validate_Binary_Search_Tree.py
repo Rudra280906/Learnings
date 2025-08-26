@@ -1,5 +1,5 @@
 #My solution for Validate Binary Search Tree Problem on Leetcode
-def isValidBST(self, root) -> bool:
+def isValidBST(root) -> bool:
     running_list = []
     def DFS(root):
         if not root:
